@@ -64,4 +64,100 @@ caixabank-backend-java-realestate
 4. **Task 4: Sistema automático de solicitud de hipoteca**
 5. **Task 5: Sistema de pujas para propiedades**  
 ---
- 
+
+### Task 1: Dockerfile & Health Check.
+
+En esta primera tarea me aseguré de que el entorno Docker estuviera correctamente configurado. Implementé un endpoint de health check para validar que la API estuviera activa y que la conexión a la base de datos se realizara sin inconvenientes.
+
+Para probar esto, levanto el entorno ejecutando:
+
+```bash
+docker-compose up --build
+```
+---
+
+### Task 2: Login y Registro con JWT
+**Objetivo:**  
+Implementé endpoints seguros para el registro y autenticación de usuarios usando JSON Web Tokens (JWT).
+
+- **Registro (`POST /api/auth/register`):**
+    - Recibo datos del usuario (nombre de usuario, email y contraseña).
+    - Valido que el email sea único.
+    - Encripto la contraseña (usando BCrypt) antes de almacenarla.
+    - Los nuevos usuarios se registran con el estado `unemployed` por defecto.
+    - Devuelvo un mensaje de éxito al finalizar el registro.
+
+- **Login (`POST /api/auth/login`):**
+    - Verifico las credenciales del usuario (username/email and password).
+    - Si son correctas, genero un JWT que incluye, al menos, el ID del usuario.
+    - El token tiene una fecha de expiración definida en `application properties`.
+    - El JWT se retorna en la respuesta. Ejemplo: `{ "success": true, "token": "<JWT_TOKEN>" }`.
+
+- **Chequeo de sesión (GET /api/user/me):**
+
+    - Permite verificar que el token funciona correctamente devolviendo el ID, nombre de usuario y email.
+    - Implementé filtros de seguridad para proteger los endpoints que requieren autenticación.
+
+---
+### Task 3 Extracción de Datos de Idealista
+**Objetivo:**
+Desarrollé un endpoint que extrae detalles de una propiedad desde Idealista a partir de una URL proporcionada. Ejemplo: (`https://www.idealista.com/inmueble/106898591/`).
+
+- **Endpoint (`POST /api/scrape`):**  
+
+    - Recibo un JSON con:
+      - `"url"`: La URL de la propiedad en Idealista.
+      - `"store"`: Un flag booleano que indica si debo almacenar la propiedad en la base de datos.
+  
+- **Data Extraction:**  
+    - Utilicé Jsoup para conectarme a la URL y extraer:
+      - **Tipo de propiedad:** extraído del título la primera palabra del título(ejemplo: "Chalet", "Apartamento"). Se guarda como "name" en la BD.
+      - **Título Completo:** El título completo de la propiedad que aparece en la web.
+      - **Ubicación:** La ubicación de la propiedad.
+      - **Precio:** El precio, asegurándose de que se convierta a un formato numérico estándar (decimal).
+      - **Tamaño:** El area de la propiedad (en m²).
+      - **Habitaciones:** The number of rooms, extracted from text like "4 hab.".
+    - Si los datos de alguno de estos campos no están disponibles, (se configuran en una cadena vacía o en un valor predeterminado).
+
+- **Almacenamiento:**  
+    - Si `store` es true, creo un registro de la propiedad en la base de datos, asignándole por defecto el estado `Available`.
+
+    
+- **Respuesta:**  
+    - Devuelvo un JSON con los datos extraídos y un indicador de si la propiedad fue guardada o no.
+
+---
+
+### Task 4: Sistema Automático de Solicitud de Hipoteca
+
+**Objetivo:**
+Implementé un sistema que evalúa automáticamente si un usuario califica para una hipoteca basándose en su información financiera.
+
+- **Datos de empleo:**  
+  - **Endpoint (`POST /api/employment`):** 
+ Para que los usuarios autenticados envíen o actualicen sus datos de empleo, tales como:
+
+- **Tipo de Contrato**: Valores como `indefinite`, `temporary` o `NULL` (por defecto en el registro). (Lógica en la carpeta enums, `enum ContractType` )
+-**Salario**: El salario bruto anual.
+
+Calculo el salario neto mensual utilizando los tramos impositivos vigentes en España y actualizo el estado de empleo del usuario. (Se encuentra el cálculo en la `carpeta utils` en la clase llamada `TaxCalculator`)
+
+- **Solicitud de hipoteca:**
+  - **Endpoint (`POST /api/mortgage`):** 
+  Para que el usuario solicite una hipoteca:
+
+    - Verifico que el usuario tenga empleo.
+    - Calculo el coste total de la propiedad (precio + 15% extras).
+    - Utilizo el salario neto mensual y el tipo de contrato para determinar el umbral permitido (30% para indefinido, 15% para temporal).
+    - Empleo la fórmula estándar de amortización para calcular la cuota mensual.
+    - Aprobar o rechazar la solicitud basándome en si la cuota mensual supera el umbral permitido.
+    - Si es aprobada, almaceno los detalles de la hipoteca en la base de datos.
+
+- **Dashboard del usuario:**
+     
+    - Implemente el endpoint (`GET /api/user/dashboard`) tque muestra los datos personales del usuario, incluyendo la información de empleo y las hipotecas asociadas.
+    
+- **Response:**  
+    - Devuelve una respuesta JSON que indica si se aprobó la hipoteca, el pago mensual calculado y (si se aprobó) el ID de la hipoteca.
+
+---
