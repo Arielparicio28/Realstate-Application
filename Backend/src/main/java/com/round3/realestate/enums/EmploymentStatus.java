@@ -17,4 +17,13 @@ public enum EmploymentStatus {
         return value;
     }
 
+    public static EmploymentStatus fromValue(String value) {
+        for (EmploymentStatus type : EmploymentStatus.values()) {
+            if (type.getValue().equalsIgnoreCase(value)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Contract must be 'indefinite' or 'temporary' " + value);
+    }
+
 }

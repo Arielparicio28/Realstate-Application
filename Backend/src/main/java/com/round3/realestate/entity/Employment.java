@@ -23,7 +23,6 @@ public class Employment {
 
     @Column(name = "contract_type")
     @Enumerated(EnumType.STRING)
-    @ColumnTransformer(write = "LOWER(?)")
     private ContractType contract; // "indefinite", "temporary" o null
 
     @Column(name = "salary", nullable = false)
@@ -34,7 +33,6 @@ public class Employment {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "employment_status",nullable = false)
-    @ColumnTransformer(write = "LOWER(?)")
     private EmploymentStatus employmentStatus;
 
 }

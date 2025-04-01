@@ -1,8 +1,8 @@
 package com.round3.realestate.services;
 
-import com.round3.realestate.dto.ScrapeRequestDto;
-import com.round3.realestate.dto.ScrapeResponseDto;
-import com.round3.realestate.dto.PropertyDataDto;
+import com.round3.realestate.dtos.ScrapeRequestDto;
+import com.round3.realestate.dtos.ScrapeResponseDto;
+import com.round3.realestate.dtos.PropertyDataDto;
 import com.round3.realestate.entity.Property;
 import com.round3.realestate.repository.PropertyRepository;
 import org.jsoup.Jsoup;

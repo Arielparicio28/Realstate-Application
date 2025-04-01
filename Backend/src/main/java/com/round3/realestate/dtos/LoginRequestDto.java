@@ -1,4 +1,4 @@
-package com.round3.realestate.dto;
+package com.round3.realestate.dtos;
 
 
 import jakarta.validation.constraints.NotBlank;

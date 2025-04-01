@@ -1,8 +1,8 @@
 package com.round3.realestate.controller;
 
 
-import com.round3.realestate.dto.LoginRequestDto;
-import com.round3.realestate.dto.RegisterRequestDto;
+import com.round3.realestate.dtos.LoginRequestDto;
+import com.round3.realestate.dtos.RegisterRequestDto;
 import com.round3.realestate.response.LoginResponse;
 import com.round3.realestate.response.RegisterResponse;
 import com.round3.realestate.services.AuthService;

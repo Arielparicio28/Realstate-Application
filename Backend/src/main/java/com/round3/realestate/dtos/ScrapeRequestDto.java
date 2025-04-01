@@ -1,4 +1,4 @@
-package com.round3.realestate.dto;
+package com.round3.realestate.dtos;
 
 // Dto de entrada para hacer web scrapping
 

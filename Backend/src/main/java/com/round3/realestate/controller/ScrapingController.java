@@ -1,7 +1,7 @@
 package com.round3.realestate.controller;
 
-import com.round3.realestate.dto.ScrapeRequestDto;
-import com.round3.realestate.dto.ScrapeResponseDto;
+import com.round3.realestate.dtos.ScrapeRequestDto;
+import com.round3.realestate.dtos.ScrapeResponseDto;
 import com.round3.realestate.services.ScrapingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

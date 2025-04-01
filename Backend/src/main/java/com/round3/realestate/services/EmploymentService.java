@@ -1,8 +1,8 @@
 package com.round3.realestate.services;
 
-import com.round3.realestate.dto.EmploymentDataDto;
-import com.round3.realestate.dto.EmploymentRequestDto;
-import com.round3.realestate.dto.EmploymentResponseDto;
+import com.round3.realestate.dtos.EmploymentDataDto;
+import com.round3.realestate.dtos.EmploymentRequestDto;
+import com.round3.realestate.dtos.EmploymentResponseDto;
 import com.round3.realestate.entity.Employment;
 import com.round3.realestate.entity.User;
 import com.round3.realestate.enums.ContractType;

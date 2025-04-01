@@ -1,7 +1,7 @@
 package com.round3.realestate.controller;
 
-import com.round3.realestate.dto.EmploymentRequestDto;
-import com.round3.realestate.dto.EmploymentResponseDto;
+import com.round3.realestate.dtos.EmploymentRequestDto;
+import com.round3.realestate.dtos.EmploymentResponseDto;
 import com.round3.realestate.services.EmploymentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

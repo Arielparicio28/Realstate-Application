@@ -4,7 +4,6 @@ package com.round3.realestate.entity;
 import com.round3.realestate.enums.EmploymentStatus;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnTransformer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.validation.constraints.Email;
@@ -36,7 +35,6 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false,name = "status")
-    @ColumnTransformer(write = "LOWER(?)")
     private EmploymentStatus status = EmploymentStatus.UNEMPLOYED;
 
 

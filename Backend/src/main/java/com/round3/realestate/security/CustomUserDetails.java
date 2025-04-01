@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CustomUserDetails implements UserDetails {
+
     @Setter
     @Getter
     private Long id;

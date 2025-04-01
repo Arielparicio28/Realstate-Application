@@ -1,4 +1,4 @@
-package com.round3.realestate.dto;
+package com.round3.realestate.dtos;
 
 import com.round3.realestate.enums.EmploymentStatus;
 import lombok.Data;

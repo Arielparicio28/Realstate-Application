@@ -1,12 +1,13 @@
 package com.round3.realestate.services;
 
-import com.round3.realestate.dto.RegisterRequestDto;
+import com.round3.realestate.dtos.RegisterRequestDto;
 import com.round3.realestate.entity.User;
 import com.round3.realestate.enums.EmploymentStatus;
 import com.round3.realestate.repository.UserRepository;
 import com.round3.realestate.security.CustomUserDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,7 +36,7 @@ public class AuthService {
     @Autowired
     private HttpServletRequest request;
 
-    public User registerUser(RegisterRequestDto registerRequestDto) {
+    public User registerUser(@Valid RegisterRequestDto registerRequestDto) {
         try {
             // Validate email uniqueness
             if(userRepository.findByEmail(registerRequestDto.getEmail()).isPresent()) {
