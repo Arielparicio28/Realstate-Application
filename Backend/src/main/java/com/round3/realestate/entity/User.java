@@ -22,19 +22,20 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @Size(min = 3, max = 50)
+    @Column(unique = true,nullable = false,name = "username")
+    @Size(min = 3, max = 255)
     private String username;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "email")
+    @Size(max = 255)
     @Email
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "password")
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false,name = "status")
     @ColumnTransformer(write = "LOWER(?)")
     private EmploymentStatus status = EmploymentStatus.UNEMPLOYED;
 
