@@ -19,14 +19,15 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
-    @Column(unique = true,nullable = false,name = "username")
-    @Size(min = 3, max = 255)
+    @Column(nullable = false,name = "username",unique = true)
+    @Size(min = 3 , max = 255)
     private String username;
 
-    @Column(unique = true, nullable = false, name = "email")
-    @Size(max = 255)
+    @Column(nullable = false, name = "email",unique = true)
+    @Size(min = 3 , max = 255)
     @Email
     private String email;
 
