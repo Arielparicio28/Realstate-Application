@@ -13,7 +13,7 @@ public class Employment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employment_id")
+    @Column(nullable = false)
     private Long id;
 
     @ManyToOne
@@ -21,18 +21,18 @@ public class Employment {
     private User user;
 
 
-    @Column(name = "contract_type")
+    @Column(name = "contract")
     @Enumerated(EnumType.STRING)
     private ContractType contract; // "indefinite", "temporary" o null
 
-    @Column(name = "salary", nullable = false)
+    @Column(name = "salary")
     private double salary;
 
-    @Column(name = "net_monthly",nullable = false)
+    @Column(name = "net_monthly")
     private double netMonthly;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "employment_status",nullable = false)
+    @Column(name = "employment_status")
     private EmploymentStatus employmentStatus;
 
 }
