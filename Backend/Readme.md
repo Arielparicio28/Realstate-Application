@@ -155,9 +155,120 @@ Calculo el salario neto mensual utilizando los tramos impositivos vigentes en Es
 
 - **Dashboard del usuario:**
      
-    - Implemente el endpoint (`GET /api/user/dashboard`) tque muestra los datos personales del usuario, incluyendo la información de empleo y las hipotecas asociadas.
+    - Implemente el endpoint (`GET /api/user/dashboard`) que muestra los datos personales del usuario, incluyendo la información de empleo y las hipotecas asociadas.
     
 - **Response:**  
     - Devuelve una respuesta JSON que indica si se aprobó la hipoteca, el pago mensual calculado y (si se aprobó) el ID de la hipoteca.
 
 ---
+
+# Estructura de la Base de Datos – realestate
+
+A continuación, se muestra la lista de tablas.
+
+---
+
+## Listado de Tablas
+
+- **auctions**
+- **bids**
+- **employment**
+- **mortgages**
+- **properties**
+- **users**
+- **revoked_token**
+
+---
+
+## Detalle de las Tablas
+
+### 1. Tabla: auctions
+
+| Field                | Type          | Null | Key | Default | Extra          |
+|----------------------|---------------|------|-----|---------|----------------|
+| id                   | bigint        | NO   | PRI | NULL    | auto_increment |
+| current_highest_bid  | decimal(10,2) | YES  |     | NULL    |                |
+| end_time             | datetime(6)   | YES  |     | NULL    |                |
+| min_increment        | decimal(10,2) | YES  |     | NULL    |                |
+| start_time           | datetime(6)   | YES  |     | NULL    |                |
+| starting_price       | decimal(10,2) | YES  |     | NULL    |                |
+| status               | varchar(255)  | YES  |     | NULL    |                |
+| property_id          | bigint        | NO   | UNI | NULL    |                |
+
+---
+
+### 2. Tabla: bids
+
+| Field      | Type          | Null | Key | Default | Extra          |
+|------------|---------------|------|-----|---------|----------------|
+| id         | bigint        | NO   | PRI | NULL    | auto_increment |
+| bid_amount | decimal(10,2) | YES  |     | NULL    |                |
+| timestamp  | datetime(6)   | YES  |     | NULL    |                |
+| auction_id | bigint        | NO   | MUL | NULL    |                |
+| user_id    | bigint        | NO   | MUL | NULL    |                |
+
+---
+
+### 3. Tabla: employment
+
+| Field             | Type          | Null | Key | Default | Extra          |
+|-------------------|---------------|------|-----|---------|----------------|
+| id                | bigint        | NO   | PRI | NULL    | auto_increment |
+| contract          | Enum          | YES  |     | NULL    |                |
+| employment_status | varchar(255)  | YES  |     | NULL    |                |
+| net_monthly       | decimal(10,2) | YES  |     | NULL    |                |
+| salary            | decimal(10,2) | YES  |     | NULL    |                |
+| user_id           | bigint        | NO   | UNI | NULL    |                |
+
+---
+
+### 4. Tabla: mortgages
+
+| Field            | Type          | Null | Key | Default | Extra          |
+|------------------|---------------|------|-----|---------|----------------|
+| id               | bigint        | NO   | PRI | NULL    | auto_increment |
+| monthly_payment  | decimal(10,2) | YES  |     | NULL    |                |
+| number_of_months | int           | NO   |     | NULL    |                |
+| property_id      | bigint        | NO   | MUL | NULL    |                |
+| user_id          | bigint        | NO   | MUL | NULL    |                |
+
+---
+
+### 5. Tabla: properties
+
+| Field        | Type          | Null | Key | Default | Extra          |
+|--------------|---------------|------|-----|---------|----------------|
+| id           | bigint        | NO   | PRI | NULL    | auto_increment |
+| availability | varchar(255)  | YES  |     | NULL    |                |
+| location     | varchar(255)  | YES  |     | NULL    |                |
+| name         | varchar(255)  | YES  |     | NULL    |                |
+| price        | decimal(38,2) | YES  |     | NULL    |                |
+| rooms        | varchar(255)  | YES  |     | NULL    |                |
+| size         | varchar(255)  | YES  |     | NULL    |                |
+
+---
+
+### 6. Tabla: users
+
+| Field    | Type         | Null | Key | Default | Extra          |
+|----------|--------------|------|-----|---------|----------------|
+| id       | bigint       | NO   | PRI | NULL    | auto_increment |
+| email    | varchar(255) | NO   | UNI | NULL    |                |
+| password | varchar(255) | NO   |     | NULL    |                |
+| username | varchar(255) | NO   | UNI | NULL    |                |
+| status   | Enum         | NO   | UNI | NULL    |                |
+
+___
+
+---
+
+### 7. Tabla: revoked_tokens
+
+| Field           | Type         | Null | Key | Default | Extra          |
+|-----------------|--------------|------|-----|---------|----------------|
+| id              | bigint       | NO   | PRI | NULL    | auto_increment |
+| expiration_date | datetime(6)  | NO   | UNI | NULL    |                |
+| token           | varchar(500) | NO   |     | NULL    |                |
+| username        | varchar(255) | NO   | UNI | NULL    |                |
+
+___
