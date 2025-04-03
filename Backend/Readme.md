@@ -224,13 +224,17 @@ A continuación, se muestra la lista de tablas.
 
 ### 4. Tabla: mortgages
 
-| Field            | Type          | Null | Key | Default | Extra          |
-|------------------|---------------|------|-----|---------|----------------|
-| id               | bigint        | NO   | PRI | NULL    | auto_increment |
-| monthly_payment  | decimal(10,2) | YES  |     | NULL    |                |
-| number_of_months | int           | NO   |     | NULL    |                |
-| property_id      | bigint        | NO   | MUL | NULL    |                |
-| user_id          | bigint        | NO   | MUL | NULL    |                |
+| Field              | Type          | Null | Key | Default | Extra          |
+|--------------------|---------------|------|-----|---------|----------------|
+| id                 | bigint        | NO   | PRI | NULL    | auto_increment |
+| monthly_payment    | decimal(10,2) | YES  |     | NULL    |                |
+| number_of_months   | int           | NO   |     | NULL    |                |
+| property_id        | bigint        | NO   | MUL | NULL    |                |
+| user_id            | bigint        | NO   | MUL | NULL    |                |
+| interestRate       | decimal(2,2)  | YES  | MUL | NULL    |                |
+| allowed_percentage | double        | NO   | MUL | NULL    |                |
+| approvalDate       | datetime      | NO   | MUL | NULL    |                |
+| totalCost          | decimal(10,2) | NO   | MUL | NULL    |                |
 
 ---
 

@@ -25,7 +25,7 @@ public class Property {
     @Column( name = "location")
     private String location;
 
-    @Column( name = "price")
+    @Column( name = "price", precision = 38,scale = 2)
     private BigDecimal price;
 
     @Column(name = "size")
