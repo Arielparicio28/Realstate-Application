@@ -1,4 +1,4 @@
-# 🏦 Mi Desafío Backend en Java para Subastas Inmobiliarias - Real Estate Auctionator 🏡
+# Backend en Java para Subastas Inmobiliarias - Real Estate Auctionator
 
 **Categoría:** Software  
 **Subcategoría:** Java Backend  
@@ -8,21 +8,20 @@
 
 ## 🌐 Mi Motivación y Contexto
 
-Decidí afrontar este reto para simular un sistema de subastas inmobiliarias para CaixaBank. Con este proyecto, quise demostrar mis habilidades desarrollando una API segura en Java. Implementé diversas funcionalidades que incluyen:  
+Decidí afrontar este reto para simular un sistema de subastas inmobiliarias.Con este proyecto, quise demostrar mis habilidades desarrollando una API segura en Java. Implementé diversas funcionalidades que incluyen:  
 - Autenticación y registro de usuarios mediante JWT.  
+- Docker para contenizar la aplicación.
 - Extracción (scraping) de datos de propiedades directamente desde Idealista.  
 - Un sistema automático de solicitud de hipotecas basado en datos financieros del usuario.  
 - Un sistema de subastas para propiedades utilizando RabbitMQ para gestionar las pujas concurrentes.
 
 El objetivo principal fue evaluar mi capacidad para desarrollar APIs seguras, extraer datos externos, implementar reglas de negocio y manejar el procesamiento asíncrono de mensajes a través de colas.
 
-Para más detalles, también leí detenidamente el archivo [RealEstate_App_info](https://cdn.nuwe.io/challenge-asset-files/CB-Round3/RealEstate_App_Info.pdf).
-
 ---
 
 ## 📂 Estructura del Repositorio
 
-Organizo el proyecto con una estructura base, que aunque puede variar según la solución final, sigue la siguiente referencia:
+Organizo el proyecto con la siguiente estructura base:
 
 ```bash
 caixabank-backend-java-realestate
@@ -68,7 +67,7 @@ caixabank-backend-java-realestate
 ### Task 1: Dockerfile & Health Check.
 
 En esta primera tarea me aseguré de que el entorno Docker estuviera correctamente configurado. Implementé un endpoint de health check para validar que la API estuviera activa y que la conexión a la base de datos se realizara sin inconvenientes.
-
+- **API Health Check (`GET http://localhost:3000/health`):**
 Para probar esto, levanto el entorno ejecutando:
 
 ```bash
@@ -115,7 +114,7 @@ Desarrollé un endpoint que extrae detalles de una propiedad desde Idealista a p
       - **Título Completo:** El título completo de la propiedad que aparece en la web.
       - **Ubicación:** La ubicación de la propiedad.
       - **Precio:** El precio, asegurándose de que se convierta a un formato numérico estándar (decimal).
-      - **Tamaño:** El area de la propiedad (en m²).
+      - **Tamaño:** El área de la propiedad (en m²).
       - **Habitaciones:** The number of rooms, extracted from text like "4 hab.".
     - Si los datos de alguno de estos campos no están disponibles, (se configuran en una cadena vacía o en un valor predeterminado).
 
