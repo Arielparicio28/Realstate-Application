@@ -150,7 +150,7 @@ Calculo el salario neto mensual utilizando los tramos impositivos vigentes en Es
     - Calculo el coste total de la propiedad (precio + 15% extras).
     - Utilizo el salario neto mensual y el tipo de contrato para determinar el umbral permitido (30% para indefinido, 15% para temporal).
     - Empleo la fórmula estándar de amortización para calcular la cuota mensual.
-    - Aprobar o rechazar la solicitud basándome en si la cuota mensual supera el umbral permitido.
+    - Aprobar o rechazar la solicitud basándome en sí la cuota mensual supera el umbral permitido.
     - Si es aprobada, almaceno los detalles de la hipoteca en la base de datos.
 
 - **Dashboard del usuario:**
