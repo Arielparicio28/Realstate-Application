@@ -1,7 +1,9 @@
 package com.round3.realestate.controller;
 
+import com.round3.realestate.dtos.DashboardResponseDto;
 import com.round3.realestate.entity.User;
 import com.round3.realestate.services.AuthService;
+import com.round3.realestate.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
     @Autowired
     AuthService authService;
+
+    @Autowired
+    private UserService dashboardService;
 
     // Check session endpoint
     @GetMapping("/me")
@@ -39,5 +45,8 @@ public class UserController {
         }
     }
 
-
+    @GetMapping("/dashboard")
+    public DashboardResponseDto getUserDashboard() {
+        return dashboardService.getUserDashboard();
+    }
 }
