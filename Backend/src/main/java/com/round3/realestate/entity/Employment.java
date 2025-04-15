@@ -4,7 +4,6 @@ import com.round3.realestate.enums.ContractType;
 import com.round3.realestate.enums.EmploymentStatus;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnTransformer;
 
 @Entity
 @Table(name = "employment")
