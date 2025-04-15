@@ -161,6 +161,77 @@ Calculo el salario neto mensual utilizando los tramos impositivos vigentes en Es
 
 ---
 
+___
+
+### Task 5: Sistema de Pujas para una propiedad.
+
+**Objetivo:**
+Implementar un sistema de subastas donde se puedan ofertar propiedades mediante pujas concurrentes utilizando RabbitMQ para gestionarlas.
+
+- **Creación de la Subasta:**
+   - **Endpoint: (`POST /api/auction/create`)**
+
+   - **Funcionalidad:**
+       Este endpoint permite crear una nueva subasta para una propiedad.
+   
+   Detalles que debe incluir la subasta:
+
+   - Referencia de la propiedad (la propiedad debe existir en la base de datos).
+   - Horas de inicio y fin (formato ISO 8601).
+   - Precio de salida.
+   - Incremento mínimo de la puja.
+   - La puja máxima inicial se establece con el precio de salida.
+
+
+- **Realización de Pujas**
+  - **Endpoint: (`POST /api/auction/{auctionId}/bid`)**
+
+  -**Funcionalidad:**
+   Permite a los usuarios autenticados realizar pujas.
+
+   Acciones al realizar una puja:
+
+   - Verificar que la subasta exista y esté aún abierta.
+   - Crear un mensaje de puja que contenga: ID de la subasta, ID del usuario, monto de la puja y la marca de tiempo.
+   - Publicar el mensaje de puja en una cola de RabbitMQ.
+   - El mensaje de puja se procesa de forma asíncrona mediante un consumidor, el cual actualiza la puja máxima actual de la subasta en caso de que sea necesario.
+
+- **Detalles de la Subasta**
+  - **Endpoint: (`GET /api/auction/{auctionId}`)**
+
+  - **Funcionalidad:**
+   Permite obtener los detalles de la subasta, incluyendo todas las pujas realizadas.
+
+- **Cierre de la Subasta**
+
+  - **Endpoint: (`PATCH /api/auction/{auctionId}/close`)**
+
+  - **Funcionalidad:**
+   Este endpoint cierra la subasta y realiza las siguientes acciones:
+
+   - Cambia el estado de la subasta a "cerrada".
+   - Procesa todas las pujas para determinar la puja ganadora (la puja más alta).
+   - Actualiza la disponibilidad de la propiedad a "No disponible".
+   - Retorna una respuesta en formato JSON que contenga el monto de la puja ganadora y el ID del usuario ganador.
+
+**Concurrencia & RabbitMQ**
+
+  - El sistema de pujas utiliza RabbitMQ para manejar grandes volúmenes de pujas de manera concurrente.
+  - Las pujas se encolan y luego se procesan de forma asíncrona mediante un listener de mensajes, minimizando así las condiciones de carrera.
+  - Se puede implementar un retraso en el consumidor (para fines de prueba) y observar cómo se acumulan los mensajes en la cola.
+
+  - **Configuración en RabbitMQ:**
+
+   - `bid.queue`
+   - `bid.exchange`
+   - `bid.routingkey`
+___
+
+
+
+
+
+
 # Estructura de la Base de Datos – realestate
 
 A continuación, se muestra la lista de tablas.
