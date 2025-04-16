@@ -1,5 +1,6 @@
 package com.round3.realestate.entity;
 
+import com.round3.realestate.enums.AuctionsStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class Auctions {
     private Property property;
 
     @Column(name = "status")
-    private String status;
+    private AuctionsStatus status;
 
     @Column(name = "current_highest_bid", precision = 10, scale = 2)
     private BigDecimal currentHighestBid;
