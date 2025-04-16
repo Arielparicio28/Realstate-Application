@@ -14,22 +14,20 @@ public class AuctionsRequestDto {
     @NotNull(message = "Property ID is required")
     private Long propertyId;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Starting price is required")
+    @Positive(message = "Starting price must be positive")
     private BigDecimal startingPrice;
 
-    @Positive
-    private BigDecimal currentHighestBid = getStartingPrice();
 
-    @NotNull
-    @Positive
-    private BigDecimal minIncrement;
+    @NotNull(message = "Minimum bid increment is required")
+    @Positive(message = "Minimum bid increment must be positive")
+    private BigDecimal minimumBidIncrement;
 
-    @NotNull
+    @NotNull(message = "Start time is required")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private OffsetDateTime startTime;
 
-    @NotNull
+    @NotNull(message = "End time is required")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private OffsetDateTime endTime;
 }
