@@ -254,16 +254,18 @@ A continuación, se muestra la lista de tablas.
 
 ### 1. Tabla: auctions
 
-| Field                | Type          | Null | Key | Default | Extra          |
-|----------------------|---------------|------|-----|---------|----------------|
-| id                   | bigint        | NO   | PRI | NULL    | auto_increment |
-| current_highest_bid  | decimal(10,2) | YES  |     | NULL    |                |
-| end_time             | datetime(6)   | YES  |     | NULL    |                |
-| min_increment        | decimal(10,2) | YES  |     | NULL    |                |
-| start_time           | datetime(6)   | YES  |     | NULL    |                |
-| starting_price       | decimal(10,2) | YES  |     | NULL    |                |
-| status               | varchar(255)  | YES  |     | NULL    |                |
-| property_id          | bigint        | NO   | UNI | NULL    |                |
+| Field               | Type          | Null | Key | Default | Extra          |
+|---------------------|---------------|------|-----|---------|----------------|
+| id                  | bigint        | NO   | PRI | NULL    | auto_increment |
+| current_highest_bid | decimal(10,2) | YES  |     | NULL    |                |
+| end_time            | datetime(6)   | YES  |     | NULL    |                |
+| min_increment       | decimal(10,2) | YES  |     | NULL    |                |
+| start_time          | datetime(6)   | YES  |     | NULL    |                |
+| starting_price      | decimal(10,2) | YES  |     | NULL    |                |
+| status              | varchar(255)  | YES  |     | NULL    |                |
+| property_id         | bigint        | NO   | UNI | NULL    |                |
+| winning_user_id     | bigint        | YES  | UNI | NULL    |                |
+
 
 ---
 

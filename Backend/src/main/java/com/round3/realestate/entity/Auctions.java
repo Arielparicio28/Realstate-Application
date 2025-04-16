@@ -22,6 +22,10 @@ public class Auctions {
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
+    @ManyToOne
+    @JoinColumn(name = "winning_user_id")
+    private User winningUser;
+
     @Column(name = "status")
     private AuctionsStatus status;
 
