@@ -1,7 +1,6 @@
 package com.round3.realestate.entity;
 
 import com.round3.realestate.enums.AuctionsStatus;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
