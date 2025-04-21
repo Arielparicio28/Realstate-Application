@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 public class BidRequestDto {
-    @NotNull
-    @Positive
+    @NotNull(message = "Bid amount is required")
+    @Positive(message = "Bid amount must be positive")
     private BigDecimal amount;
 }

@@ -38,7 +38,6 @@ caixabank-backend-java-realestate
 │       │               ├── enums            # Enums creado para manejar algunas entradas en mi BD.
 │       │               ├── exceptions       # Clases con excepciones globales de la aplicación.
 │       │               ├── messaging        # Clases para publicar/consumir mensajes (BidMessage, BidPublisher, etc.)
-│       │               ├── payload          # Clases para request y response
 │       │               ├── repository       # Repositorios de Spring Data
 │       │               ├── response         # Login and Register Response.
 │       │               └── security         # Implementaciones de JWT y UserDetails

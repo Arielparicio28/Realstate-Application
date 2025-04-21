@@ -18,14 +18,14 @@ public class Bid {
 
     @ManyToOne
     @JoinColumn(name = "auction_id", nullable = false)
-    private Auctions auctions;
+    private Auction auction;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(name = "bid_amount")
-    private BigDecimal bid_amount;
+    private BigDecimal amount;
 
     @Column(name = "timestamp")
     private OffsetDateTime timestamp;

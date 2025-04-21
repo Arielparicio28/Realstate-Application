@@ -1,5 +1,6 @@
-package com.round3.realestate.exception;
+package com.round3.realestate.exceptions;
 
+import com.round3.realestate.exceptions.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -46,6 +47,16 @@ public class GlobalExceptionHandler {
         response.put("detalle", ex.getMostSpecificCause().getMessage());
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", "Resource not found");
+        response.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
 }

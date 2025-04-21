@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 @Entity
 @Table(name = "auctions")
 @Data
-public class Auctions {
+public class Auction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Auctions {
     private BigDecimal currentHighestBid;
 
     @Column(name = "min_increment",precision = 10, scale = 2)
-    private BigDecimal minIncrement;
+    private BigDecimal minimumBidIncrement;
 
     @Column(name = "starting_price", precision = 10, scale = 2)
     private BigDecimal startingPrice;

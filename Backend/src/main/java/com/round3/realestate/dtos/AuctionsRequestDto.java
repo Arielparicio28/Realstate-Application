@@ -14,13 +14,7 @@ public class AuctionsRequestDto {
     @NotNull(message = "Property ID is required")
     private Long propertyId;
 
-    @NotNull(message = "Starting price is required")
-    @Positive(message = "Starting price must be positive")
     private BigDecimal startingPrice;
-
-
-    @NotNull(message = "Minimum bid increment is required")
-    @Positive(message = "Minimum bid increment must be positive")
     private BigDecimal minimumBidIncrement;
 
     @NotNull(message = "Start time is required")
