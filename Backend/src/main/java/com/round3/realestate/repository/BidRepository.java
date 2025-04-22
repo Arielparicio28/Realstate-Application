@@ -10,9 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface BidRepository extends JpaRepository<Bid,Long> {
-    /**
-     * Encuentra todas las pujas para una subasta específica ordenadas por timestamp descendente (más reciente primero)
-     */
+
+    //Encuentra todas las pujas para una subasta específica ordenadas por timestamp descendente (más reciente primero)
     List<Bid> findByAuctionOrderByTimestampDesc(Auction auction);
 
     /**
@@ -21,13 +20,9 @@ public interface BidRepository extends JpaRepository<Bid,Long> {
      */
     Optional<Bid> findTopByAuctionOrderByAmountDesc(Auction auction);
 
-    /**
-     * Encuentra todas las pujas de un usuario específico
-     */
+    // Encuentra todas las pujas de un usuario específico
     List<Bid> findByUserId(Long userId);
 
-    /**
-     * Cuenta el número de pujas para una subasta
-     */
+    //Cuenta el número de pujas para una subasta
     long countByAuction(Auction auction);
 }
