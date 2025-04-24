@@ -23,7 +23,7 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final HandlerExceptionResolver handlerExceptionResolver;
+    final HandlerExceptionResolver handlerExceptionResolver;
     private final RevokedTokenRepository revokedTokenRepository;
     private final JwtService jwtService;
     private final UserRepository userRepository; // Inyectamos el repositorio para buscar por ID
