@@ -1,24 +1,25 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Home from "./pages/Home"
-import { ProtectedRoute } from "./routes/ProtectedRoute"
-import LoginAndRegister from "./pages/LoginAndRegister"
 
+import { ProtectedRoute } from "./routes/ProtectedRoute";
+import AuthForm from "./pages/AuthForm";  
+import DashBoard from "./pages/Dashboard";
 function App() {
-
   return (
-    <>
-      <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginAndRegister />} />
-        <Route path="/register" element={<LoginAndRegister />} />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    </>
-  )
+    <BrowserRouter>
+    <Routes>
+      {/* rutas abiertas */}
+      <Route path="/login" element={<AuthForm mode="login" />} />
+      <Route path="/register" element={<AuthForm mode="register" />} />
+
+      {/* rutas protegidas */}
+      <Route element={<ProtectedRoute />}>
+        {/* SOLO estas rutas requieren token */}
+        <Route path="/" element={<DashBoard />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
