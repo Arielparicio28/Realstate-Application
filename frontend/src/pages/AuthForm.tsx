@@ -1,4 +1,3 @@
-// src/pages/AuthForm.tsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../components/Login";
@@ -15,27 +14,22 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(mode === "login");
 
-  // Sincroniza si el usuario llega directamente vía URL
   useEffect(() => {
     setIsLogin(mode === "login");
   }, [mode]);
 
   const handleToggle = () => {
-    if (isLogin) {
-      navigate("/register");
-    } else {
-      navigate("/login");
-    }
+    navigate(isLogin ? "/register" : "/login");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 px-4 sm:px-6 py-8">
       <Toggle isLogin={isLogin} onToggle={handleToggle} />
 
-      <div className="w-80 bg-white rounded-xl shadow-lg overflow-hidden perspective-1000">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden perspective-1000 p-6 sm:p-8">
         <div
           className={`
-            relative w-full h-96 transform transition-transform duration-800
+            relative w-full h-[28rem] transform transition-transform duration-800
             [transform-style:preserve-3d]
             ${!isLogin ? "rotate-y-180" : ""}
           `}

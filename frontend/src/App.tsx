@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import AuthForm from "./pages/AuthForm";  
-import DashBoard from "./pages/Dashboard";
+import DashBoard from "./pages/DashBoard";
 function App() {
   return (
     <BrowserRouter>

@@ -1,8 +1,8 @@
-// src/components/Login.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../services/auth";
 import Button from "./Button";
+import axios from "axios";
 
 interface LoginProps {
   isVisible: boolean;
@@ -11,9 +11,11 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ isVisible }) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+
     try {
       const response = await postLogin({
         emailOrUsername: loginEmail,
@@ -22,8 +24,19 @@ const Login: React.FC<LoginProps> = ({ isVisible }) => {
       const { token } = response.data;
       localStorage.setItem("token", token);
       navigate("/");
-    } catch (error) {
-      console.error(error);
+    }catch (error: unknown) {
+  
+      if (axios.isAxiosError(error)) {
+    console.error("Axios error:", error.response?.data);
+
+    const message = error.response?.data?.message;
+    if (message) {
+      alert(message);
+    }
+  } else {
+    console.error("Unknown error:", error);
+    alert("Something went wrong.");
+  }
     }
   };
 
@@ -41,10 +54,11 @@ const Login: React.FC<LoginProps> = ({ isVisible }) => {
         className="w-full mb-4 p-2 border-2 border-gray-600 rounded-md focus:border-blue-500 outline-none"
         placeholder="Username or Email"
       />
+
       <input
         value={loginPassword}
         onChange={(e) => setLoginPassword(e.target.value)}
-        className="w-full mb-6 p-2 border-2 border-gray-600 rounded-md focus:border-blue-500 outline-none"
+        className="w-full mb-4 p-2 border-2 border-gray-600 rounded-md focus:border-blue-500 outline-none"
         type="password"
         placeholder="Password"
       />
